@@ -1,6 +1,6 @@
 # GPU
-**NVIDIA_SMI**
-Monitor is using Nvidia-smi tool to profile :
+**NVML**
+Monitor is using NVML library to profile :
 1. device_fan_speed
 2. device_temperature
 3. device_power_usage

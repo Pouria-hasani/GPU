@@ -20,7 +20,12 @@ Then just run monitor executable:
 ```
 
 **nvprof** 
-To get data using nvprof use the following commad:
+To monitor matrixMul using nvprof use the following commad:
 ```
  sudo /usr/local/cuda-10.1/bin/nvprof --unified-memory-profiling off --cpu-profiling on --metrics all --events all --timeout 20  --csv --log-file %p ./matrixMul
+```
+
+To monitor mnist.py using nvprof use the following commad:
+```
+ sudo /usr/local/cuda-10.1/bin/nvprof --unified-memory-profiling off --cpu-profiling on --metrics all --events all --timeout 20  --csv --log-file %p python3 mnist.py
 ```

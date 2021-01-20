@@ -20,24 +20,24 @@ Then just run monitor executable:
 ```
 
 **nvml.c**
-Collects statistics and sets the GPU and memory frequency. The output is a bit messy but it almost has the whole nvml library's functions
+Collects the statistics and sets the GPU and memory frequency. The output is a bit messy but it almost has whole the nvml library's functions.
 To compile the code run following:
 ```
 nvcc -o nvml nvml.c -lnvidia-ml
 ```
 **clkset.c**
-Sets the GPU and memory's clocks
+Sets the GPU and memory's clocks.
 To compile run the following:
 ```
 nvcc -o clkset clkset.c -lnvidia-ml
 ```
 Then run ```sudo ./clkset```. The program asks you to enter the desired clock value in MHz. 
 The entered clock value should be supported by the device.
-To check the supported clock by device use supp_clk.c code
+To check the supported clocks by device use supp_clk.c code
 
 **supp_clk.c**
 
-This code provides the supported memory and GPU clock. For each memory clock there are different available GPU clock.
+This code provides the supported memory and GPU clocks. For each memory clock there are different available GPU clocks.
 To compile the code run the following:
 ```
 nvcc -o supp_clk supp_clk.c -lnvidia-ml

@@ -43,6 +43,12 @@ To compile the code run the following:
 nvcc -o supp_clk supp_clk.c -lnvidia-ml
 ```
 
+**nvml_output.c**
+Shows the statistics in an organized way in the terminal. To compile the code run following:
+```
+nvcc -o nvml_output nvml_output.c -lnvidia-ml
+```
+
 **nvprof** 
 To monitor matrixMul using nvprof use the following commad:
 ```

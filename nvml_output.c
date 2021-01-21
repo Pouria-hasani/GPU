@@ -138,67 +138,6 @@ nvmlProcessInfo_t * infos = malloc(sizeof(nvmlProcessInfo_t));
 unsigned int  pid;
 unsigned long long usedGpuMemory ;
 
-//Supported memory and GPU clocks for device 0
-nvmlDeviceGetHandleByIndex_v2 (0, &device );
-printf("\n\n*******Device number is: %d *******",0);
-Counter = 10;
-nvmlReturn = nvmlDeviceGetSupportedMemoryClocks (device,&Counter ,&clockMHz );
-if(nvmlReturn == NVML_SUCCESS)
-{
-	count =1000;
-	mem_spp_clk = malloc(Counter*sizeof(unsigned int));
-	nvmlReturn = nvmlDeviceGetSupportedMemoryClocks (device,&Counter ,mem_spp_clk );
-	for(int i=0;i<Counter ;i++)
-	{
-		printf("\n\n\n*************** supported memory clocks");
-		printf("\t%u****************",mem_spp_clk[i]); 
-		//Retrieves the list of possible graphics clocks that can be used as an argument for nvmlDeviceSetApplicationsClocks
-		memoryClockMHz = mem_spp_clk[i];
-		nvmlReturn_1 = nvmlDeviceGetSupportedGraphicsClocks(device,memoryClockMHz,&count,GPU_clocksMHz);
-		if(nvmlReturn_1 == NVML_SUCCESS)
-			{
-				unsigned int* gpu_spp_clk = malloc(count*sizeof(unsigned int));
-				nvmlReturn_1 = nvmlDeviceGetSupportedGraphicsClocks(device,mem_spp_clk[i],&count,gpu_spp_clk );
-				for(int j=0;j<count;j++)
-				{
-					if(nvmlReturn_1 == NVML_SUCCESS)
-						printf("\n                supported gpu clock: %u",gpu_spp_clk[j]); 
-
-					if(nvmlReturn_1  == NVML_ERROR_UNINITIALIZED)
-						printf("\n the library has not been successfully initialized\n");
-						if(nvmlReturn_1  == NVML_ERROR_NOT_FOUND)
-						printf("\n the specified memoryClockMHz is not a supported frequency\n");
-					if(nvmlReturn_1  == NVML_ERROR_INVALID_ARGUMENT)
-						printf("\ndevice is invalid or clock is NULL\n");
-					if(nvmlReturn_1  == NVML_ERROR_NOT_SUPPORTED)
-						printf("\nthe device does not support this feature\n");
-						if(nvmlReturn_1  == NVML_ERROR_INSUFFICIENT_SIZE)
-						printf("\ncount is too small\n");
-					if(nvmlReturn_1 == NVML_ERROR_GPU_IS_LOST)
-						printf("\n the target GPU has fallen off the bus or is otherwise inaccessible\n");
-					if(nvmlReturn_1 == NVML_ERROR_UNKNOWN)
-						printf("\nunexpected error\n");
-				}
-			} 
-	}
-}
-
-
-if(nvmlReturn  == NVML_ERROR_UNINITIALIZED)
-	printf("\n the library has not been successfully initialized\n");
-if(nvmlReturn  == NVML_ERROR_INVALID_ARGUMENT)
-	printf("\ndevice is invalid or clock is NULL\n");
-if(nvmlReturn  == NVML_ERROR_NOT_SUPPORTED)
-	printf("\nthe device does not support this feature\n");
-	if(nvmlReturn  == NVML_ERROR_INSUFFICIENT_SIZE)
-	printf("\ncount is too small\n");
-if(nvmlReturn  == NVML_ERROR_GPU_IS_LOST)
-	printf("\n the target GPU has fallen off the bus or is otherwise inaccessible\n");
-if(nvmlReturn  == NVML_ERROR_UNKNOWN)
-	printf("\nunexpected error\n");
-
-
-
 for(unsigned int index = 0;index<deviceCount;index++)
 {
 	nvmlReturn = nvmlDeviceGetHandleByIndex_v2 (index, &device );
